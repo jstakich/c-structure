@@ -1,0 +1,73 @@
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+using System.IO;
+using System.Net.Mail;
+using System.Configuration;
+using System.Collections;
+using System.Collections;
+using System.Data.SqlClient;
+
+struct Structure_Log_Data
+{
+    public DateTime Edit_Date;
+    public string GUID_of_Editor;
+    public string GUID_of_Record;
+    public string Page_User_Using;
+    public string Button_Clicked;
+    public string First_Name;
+    public string Middle_Name;
+    public string Last_Name;
+    public string Account_Name;
+    public string Email;
+    public string Employee_ID;
+    public string Telephone;
+    public string Description;
+    public string Title;
+    public string Department;
+    public string Division;
+    public string Group_One;
+    public string Group_Two;
+    public string Group_Three;
+    public string Group_Four;
+    public string Group_Five;
+    public string Email_Account;
+    public string Notes_from_App;
+};
+
+
+ static Structure_Log_Data Struct_Log_Data;
+ 
+ 
+   private void Write_Array_Out()
+        {
+            try
+            {
+                StreamWriter sw_MyFile = new StreamWriter(@MyFile);
+
+                string Header = "";
+                Header = "Field1" + " , " + "Field12" + " , " + "Field2" + " , " + "Field4" + " , " + "Field5" + " , " + "Field6";
+                sw_MyFile.WriteLine(Header);
+
+                foreach (Structure_Log_Data Struct_Log_Data in Arraylist_CityView)
+                {
+                    string String_to_Write = "";
+                    String_to_Write = Struct_Log_Data.Field1 + " , " + Struct_Log_Data.Field2 + " , " + Struct_Log_Data.Field3 + " , " + Struct_Log_Data.Field4 + " , " + Struct_Log_Data.Field5 + " , " + Struct_Log_Data.Field6;
+                    sw_MyFile.WriteLine(String_to_Write);
+
+                }
+                sw_MyFile.Close();
+                sw_MyFile.Dispose();
+
+            }
+            catch (Exception jerror1)
+            {
+                Send_Email_On_Error(jerror1.ToString());
+                System.Environment.Exit(1);
+            }
+
+        }
